@@ -1,0 +1,24 @@
+---
+- name: My First Playbook
+  hosts: all
+  become: yes
+  tasks:
+  - name: Install HTTPD Service
+    yum:
+      name: httpd
+      state: present
+  - name: Start HTTPD Service
+    service:
+      name: httpd
+      state: started
+  - name: Check HTTPD Status
+    command: service httpd status
+    register: service_output
+  - name: Print HTTPD Status
+    debug:
+      var: service_output.stdout
+    when: service_output.rc == 0
+  - name: Copy HTML Page
+    copy:
+      src: index.html
+      dest: /var/www/html/
