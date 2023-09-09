@@ -25,12 +25,10 @@
 
 
 
----
 - name: Temporary Playbook
-  hosts: tag_Name_Ansible___Tower_Weekend___Target
+  hosts: all
   vars:
     ansible_user: ec2-user
-  gather_facts: no
   tasks:
     - debug:
         var: ansible_facts
